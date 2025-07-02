@@ -63,9 +63,7 @@ const sessionOptions = {
     },
 };
 
-app.get("/", (req, res) => {
-    res.render("listings/index");
-});
+
 
 
 app.use(session(sessionOptions));
@@ -81,9 +79,11 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
   res.locals.error=req.flash("error");
-  console.log("User from passport in Render:", req.user);
   res.locals.currUser = req.user;
   next();
+});
+app.get("/", (req, res) => {
+    res.render("listings/index");
 });
 
 
